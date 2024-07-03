@@ -1,8 +1,13 @@
 import babel from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
-  input: 'index.js',
+  input: 'src/StringDiffHighlighter.js',
   output: {
     file: 'dist/bundle.js',
     format: 'cjs',
@@ -14,7 +19,7 @@ export default {
       minimize: true,
       use: [
         ['sass', {
-          includePaths: ['./src/styles', './node_modules']
+          includePaths: [path.resolve(__dirname, 'src/styles'), 'node_modules']
         }]
       ]
     }),
