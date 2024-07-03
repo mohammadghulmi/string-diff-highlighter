@@ -1,37 +1,24 @@
 import { findDifferences } from './FindDifferences';
+import React from 'react';
 
-export const  highlightDifferences = (str1, str2, highlightColor) => {
-    const differences = findDifferences(str1, str2);
+export const highlightDifferences = (str1, str2, highlightColor) => {
+  const differences = findDifferences(str1, str2);
 
-    const highlightedStr1 = differences.reduce((acc, diff, index) => {
-        const prevIndex = index === 0 ? 0 : differences[index - 1].index + 1;
-        if (diff.type === 'removed') {
-            return [
-                ...acc,
-                <span key={prevIndex}>{str1.slice(prevIndex, diff.index)}</span>,
-                <span key={`r${diff.index}`} style={{ color: highlightColor }}>{diff.char}</span>
-            ];
-        }
-        return acc;
-    }, []);
+  const highlightedStr1 = [];
+  const highlightedStr2 = [];
 
-    const highlightedStr2 = differences.reduce((acc, diff, index) => {
-        const prevIndex = index === 0 ? 0 : differences[index - 1].index + 1;
-        if (diff.type === 'added') {
-            return [
-                ...acc,
-                <span key={prevIndex}>{str2.slice(prevIndex, diff.index)}</span>,
-                <span key={`a${diff.index}`} style={{ color: highlightColor }}>{diff.char}</span>
-            ];
-        }
-        return acc;
-    }, []);
-    
-    const lastIndex1 = differences.length ? differences[differences.length - 1].index + 1 : 0;
-    const lastIndex2 = differences.length ? differences[differences.length - 1].index + 1 : 0;
-    
-    highlightedStr1.push(<span key={lastIndex1}>{str1.slice(lastIndex1)}</span>);
-    highlightedStr2.push(<span key={lastIndex2}>{str2.slice(lastIndex2)}</span>);
+  differences.forEach((diff, index) => {
+    if (diff.type === 'common') {
+      highlightedStr1.push(<span key={`common-${index}`}>{diff.char}</span>);
+      highlightedStr2.push(<span key={`common-${index}`}>{diff.char}</span>);
+    } else if (diff.type === 'removed') {
+      highlightedStr1.push(<span key={`removed-${index}`} style={{ color: highlightColor }}>{diff.char}</span>);
+      highlightedStr2.push(<span key={`removed-${index}`}></span>);
+    } else if (diff.type === 'added') {
+      highlightedStr1.push(<span key={`added-${index}`}></span>);
+      highlightedStr2.push(<span key={`added-${index}`} style={{ color: highlightColor }}>{diff.char}</span>);
+    }
+  });
 
-    return { highlightedStr1, highlightedStr2 };
-}
+  return { highlightedStr1, highlightedStr2 };
+};
