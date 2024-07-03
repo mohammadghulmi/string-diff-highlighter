@@ -21,6 +21,7 @@ export default {
     babel({
       exclude: 'node_modules/**',
       presets: ['@babel/preset-env', '@babel/preset-react'],
+      plugins: ['@babel/plugin-syntax-jsx'],
       babelHelpers: 'bundled'
     })
   ],
