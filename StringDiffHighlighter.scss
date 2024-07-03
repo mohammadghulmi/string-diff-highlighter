@@ -1,0 +1,21 @@
+.diff-container {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid grey;
+    background-color: grey;
+
+    &.vertical {
+        flex-direction: column;
+    }
+
+    &.horizontal {
+        flex-direction: row;
+    }
+}
+
+.diff-box {
+    background-color: white;
+    padding: 16px;
+    flex: 1;
+}

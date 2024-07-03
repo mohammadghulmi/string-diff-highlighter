@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "react": "^18.3.1"
+  },
+  "name": "string-diff-highlighter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@rollup/plugin-babel": "^6.0.4",
+    "node-sass": "^9.0.0",
+    "postcss": "^8.4.39",
+    "rollup": "^4.18.0",
+    "rollup-plugin-postcss": "^4.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [],
+  "author": "Mohammad Ghulmi",
+  "license": "MIT",
+  "description": "A React component that highlights the differences between two strings.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohammadghulmi/string-diff-highlighter"
+  },
+  "type": "module"
+}
