@@ -1,10 +1,41 @@
 {
+  "name": "string-diff-highlighter",
+  "version": "1.0.2",
+  "description": "A React component that highlights the differences between two strings.",
+  "type": "module",
+  "sideEffects": [
+    "*.scss"
+  ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./dist/StringDiffHighlighter.scss": "./dist/StringDiffHighlighter.scss"
+  },
+  "scripts": {
+    "build": "npm run build-js && npm run copy-styles",
+    "build-js": "npm run build-js-esm && npm run build-js-cjs && npm run build-js-cjs-package",
+    "build-js-esm": "rollup -c",
+    "build-js-cjs": "rollup -c",
+    "build-js-cjs-package": "echo '{\n  \"type\": \"commonjs\"\n}' > dist/cjs/package.json",
+    "clean": "rimraf dist",
+    "copy-styles": "cpy 'src/**/*.scss' dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [],
+  "author": "Mohammad Ghulmi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohammadghulmi/string-diff-highlighter"
+  },
   "dependencies": {
     "react": "^18.3.1"
   },
-  "name": "string-diff-highlighter",
-  "version": "1.0.0",
-  "main": "index.js",
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@babel/plugin-syntax-jsx": "^7.24.7",
@@ -14,18 +45,13 @@
     "node-sass": "^9.0.0",
     "postcss": "^8.4.39",
     "rollup": "^4.18.0",
-    "rollup-plugin-postcss": "^4.0.2"
+    "rollup-plugin-postcss": "^4.0.2",
+    "rimraf": "^3.0.0",
+    "cpy-cli": "^3.0.0"
   },
-  "scripts": {
-    "build": "rollup -c"
-  },
-  "keywords": [],
-  "author": "Mohammad Ghulmi",
-  "license": "MIT",
-  "description": "A React component that highlights the differences between two strings.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mohammadghulmi/string-diff-highlighter"
-  },
-  "type": "module"
+  "files": [
+    "dist",
+    "src",
+    "index.d.ts"
+  ]
 }
